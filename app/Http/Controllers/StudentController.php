@@ -11,4 +11,40 @@ class StudentController extends Controller
        $students = Student::all();
        return view('index')->with('students', $students);
    }
+   public function create (){
+    return view('create');
+   }
+   public function edit ($id){
+    $student = Student::find($id);
+    return view('edit')->with('student', $student);
+   }
+   public function store (Request $request){
+       //Data insert here
+       $student = new Student;
+       $student->registration_id = $request->registration_id;
+       $student->name = $request->name;
+       $student->department = $request->department;
+       $student->details = $request->details;
+       $student->save();
+
+       return redirect()->route('index');
+   }
+   public function update (Request $request, $id){
+    //Data insert here
+    $student = Student::find($id);
+    $student->registration_id = $request->registration_id;
+    $student->name = $request->name;
+    $student->department = $request->department;
+    $student->details = $request->details;
+    $student->save();
+
+    return redirect()->route('index');
+}
+public function delete ($id){
+    //Data insert here
+    $student = Student::find($id);
+    $student->delete();
+
+    return redirect()->route('index');
+}
 }
