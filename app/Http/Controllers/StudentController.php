@@ -19,6 +19,13 @@ class StudentController extends Controller
     return view('edit')->with('student', $student);
    }
    public function store (Request $request){
+       //Check validation;
+       $this->validate($request, [
+           'name'            => 'required|string|max:10|min:4',
+           'registration_id' => 'required|integer|max:20|min:4',
+           'department'      => 'required|string',
+           'details'         => 'nullable',
+       ]);
        //Data insert here
        $student = new Student;
        $student->registration_id = $request->registration_id;
@@ -40,11 +47,11 @@ class StudentController extends Controller
 
     return redirect()->route('index');
 }
-public function delete ($id){
-    //Data insert here
-    $student = Student::find($id);
-    $student->delete();
+    public function delete ($id){
+        //Data insert here
+        $student = Student::find($id);
+        $student->delete();
 
-    return redirect()->route('index');
-}
+        return redirect()->route('index');
+    }
 }

@@ -24,5 +24,20 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('create') }}">Create</a>
                 </li>
+             </ul>
+             <ul class="navbar-nav navbar-right">
+               @if (Auth::check())
+               <li class="nav-item">
+                <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
+                </li>
+               @else
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('login') }}">Login</a>
+                </li>
+                @endif
+             </ul>
             </div>
           </nav>
